@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -13,35 +14,17 @@ import javax.persistence.*;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class Equipe implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-	
+public class Equipe {
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column(name="idEquipe")
-	private Integer idEquipe;
-	
-	
-	@Column(name="nomEquipe")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idEquipe;
 	private String nomEquipe;
-
-	@Column(name="niveau")
+	@Enumerated(EnumType.STRING)
 	private Niveau niveau;
 
-	@Column(name="photo")
-	private byte[] photo;
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Etudiant> etudiants;
 
-
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER , mappedBy="equipes")
-	private Set<Etudinat> etudinats;
-	
-	@OneToOne
+	@OneToOne(mappedBy="equipe")
 	private DetailEquipe detailEquipe;
-	
-	
-	
-	
-	
-
 }

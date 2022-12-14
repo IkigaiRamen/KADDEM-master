@@ -3,7 +3,6 @@ package tn.espritSpring.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.espritSpring.DAO.entites.Equipe;
-import tn.espritSpring.DAO.entites.Etudinat;
 import tn.espritSpring.DAO.entites.Niveau;
 import tn.espritSpring.repositories.IEquipeRepository;
 import tn.espritSpring.services.IEquipeService;

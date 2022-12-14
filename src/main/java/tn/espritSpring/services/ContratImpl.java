@@ -5,9 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import tn.espritSpring.DAO.entites.Contart;
+import tn.espritSpring.DAO.entites.Contrat;
 
-import tn.espritSpring.repositories.IContartRepository;
+import tn.espritSpring.repositories.IContratRepository;
 
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -23,18 +23,18 @@ import java.util.List;
 
 
     @Autowired
-    private final  IContartRepository contartRepository ;
+    private final IContratRepository contartRepository ;
 
     @Override
-    public List<Contart> getAllContrat() {
-        return (List<Contart>) contartRepository.findAll();
+    public List<Contrat> getAllContrat() {
+        return (List<Contrat>) contartRepository.findAll();
     }
     @Override
-    public Contart addContrat(Contart c) {
+    public Contrat addContrat(Contrat c) {
         return contartRepository.save(c);
     }
     @Override
-    public Contart updateContrat(Contart c) {
+    public Contrat updateContrat(Contrat c) {
         return contartRepository.save(c);
     }
     @Override
@@ -43,7 +43,7 @@ import java.util.List;
     }
 
     @Override
-    public Contart getContratById(Integer idContart) {
+    public Contrat getContratById(Integer idContart) {
         return contartRepository.findById(idContart).orElse( null);
     }
 
@@ -52,17 +52,17 @@ import java.util.List;
         return contartRepository.nbContratsValides(startDate,endDate);
     }
 
-    @Override
+   /* @Override
     public String getChiffreAffaireEntreDeuxDate(Date startDate, Date endDate) {
 
-        List<Contart> lc =contartRepository.findContratsByArchiveIsFalseAndDateDebutContratBetween(startDate,endDate);
+        List<Contrat> lc =contartRepository.findContratsByArchiveIsFalseAndDateDebutContratBetween(startDate,endDate);
 
         float chiffre=0;
         float chiffreIA=0;
         float chiffreRESAUX=0;
         float chiffreCLOUD=0;
         float chiffreSECURITE=0;
-        for (Contart c : lc){
+        for (Contrat c : lc){
 
             if(c.getSpecialite().toString().equals("IA")){
                 chiffreIA = chiffreIA + c.getMontnatContrat();
@@ -92,7 +92,7 @@ import java.util.List;
                 "Pour un contrat dont la spécialité est SECURITE: "+chiffreSECURITE+"Dt/mois\n";
         System.out.println(ch);
         return ch;
-    }
+    }*/
 
 
 

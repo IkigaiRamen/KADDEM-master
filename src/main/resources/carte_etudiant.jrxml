@@ -6,33 +6,33 @@
 	<parameter name="id_etudiant" class="java.lang.Integer"/>
 	<queryString language="SQL">
 		<![CDATA[select nome,prenome,date_naissance,genre,photo
-from etudinat
+from etudiant
 where id_etudiant= $P{id_etudiant}]]>
 	</queryString>
 	<field name="nome" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="nome"/>
 		<property name="com.jaspersoft.studio.field.label" value="nome"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="etudinat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="etudiant"/>
 	</field>
 	<field name="prenome" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="prenome"/>
 		<property name="com.jaspersoft.studio.field.label" value="prenome"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="etudinat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="etudiant"/>
 	</field>
 	<field name="date_naissance" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.name" value="date_naissance"/>
 		<property name="com.jaspersoft.studio.field.label" value="date_naissance"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="etudinat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="etudiant"/>
 	</field>
 	<field name="genre" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="genre"/>
 		<property name="com.jaspersoft.studio.field.label" value="genre"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="etudinat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="etudiant"/>
 	</field>
 	<field name="photo" class="byte[]">
 		<property name="com.jaspersoft.studio.field.name" value="photo"/>
 		<property name="com.jaspersoft.studio.field.label" value="photo"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="etudinat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="etudiant"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>

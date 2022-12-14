@@ -13,7 +13,7 @@ import java.util.List;
 public interface IEquipeRepository extends CrudRepository<Equipe , Integer> {
 
 
-    @Query("Select e From Equipe e , DetailEquipe d where e.detailEquipe.idDetailEquipe=d.idDetailEquipe and e.niveau=?1 and d.thematique=?2")
+    @Query("Select e From Equipe e , DetailEquipe d where e.detailEquipe.equipe=d.equipe and e.niveau=?1 and d.thematique=?2")
     List<Equipe> retriveEquipeByNiveauAndThematique(Niveau niveau , String thematique);
 
     @Modifying

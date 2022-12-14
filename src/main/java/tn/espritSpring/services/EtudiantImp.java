@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
@@ -17,9 +16,10 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import tn.espritSpring.DAO.entites.*;
-import tn.espritSpring.repositories.IContartRepository;
+import tn.espritSpring.repositories.IContratRepository;
 import tn.espritSpring.repositories.IEquipeRepository;
-import tn.espritSpring.repositories.IEtudinatRepository;
+import tn.espritSpring.repositories.IEtudiantRepository;
+
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,42 +37,41 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class EtudiantImp implements IEtudiantService{
 
 
-    private final  IEtudinatRepository etudinatRepository ;
+    private final IEtudiantRepository etudiantRepository ;
     private final IEquipeRepository equipeRepository ;
-    private final IContartRepository contartRepository ;
+    private final IContratRepository contartRepository ;
 
     @Autowired
     private final Environment environment ;
 
     @Override
-    public void assignContratToEtudiant(Integer idEtudiant , Integer idContart) {
-        Contart contart=contartRepository.findById(idContart).orElse(null);
-        Etudinat etudinat=getEtudiantById(idEtudiant);
-        etudinat.setContrat(contart);
-        etudinatRepository.save(etudinat);
+    public void assignContratToEtudiant(Integer idEtudiant , Integer idContrat) {
+        Contrat contrat =contartRepository.findById(idContrat).orElse(null);
+        Etudiant etudiant =getEtudiantById(idEtudiant);
+    //    etudiant.setContrat(contart);
+        etudiantRepository.save(etudiant);
     }
 
     @Override
     @Transactional
-    public Etudinat addAndAssignEtudiantToEquipeAndContract(Integer idEtudiant, Integer idContart, Integer idEquipe) {
+    public Etudiant addAndAssignEtudiantToEquipeAndContract(Integer idEtudiant, Integer idContrat, Integer idEquipe) {
         //1. Sauvgarder l'objet etudiant et le récupérer en mémoire via l'affectation
 
-       // etudinatRepository.save(e);
-        Contart contrat = contartRepository.findById(idContart).orElse(null);
+        Contrat contrat = contartRepository.findById(idContrat).orElse(null);
         Equipe equipe = equipeRepository.findById(idEquipe).orElse(null);
-        Etudinat etudinat = etudinatRepository.findById(idEtudiant).orElse(null);
-        etudinat.setContrat(contrat);
-        etudinat = etudinatRepository.save(etudinat);
+        Etudiant etudiant = etudiantRepository.findById(idEtudiant).orElse(null);
+        etudiant.setContrats((List<Contrat>) contrat);
+        etudiant = etudiantRepository.save(etudiant);
 
         //Il faut ajouter une condution sur la collection equipes
 
-        Set<Etudinat> listE = equipe.getEtudinats();
+        Set<Etudiant> listE = (Set<Etudiant>) equipe.getEtudiants();
 
-        listE.add(etudinat);
-        equipe.setEtudinats(listE);
+        listE.add(etudiant);
+        equipe.setEtudiants((List<Etudiant>) listE);
         equipeRepository.save(equipe);
 
-        return etudinat ;
+        return etudiant ;
     }
 
 
@@ -142,13 +141,12 @@ public class EtudiantImp implements IEtudiantService{
             XSSFFont font2 = workbook.createFont();
             font2.setFontHeight(14.0);
             style2.setFont(font2);
-            this.etudinatRepository.findAll().forEach((etudinat) -> {
+            this.etudiantRepository.findAll().forEach((etudiant) -> {
                 Row row = sheet.createRow(rowCount.getAndIncrement());
                 int columnCount = 0;
-                this.createCell(row, columnCount++, etudinat.getIdEtudiant(), style);
-                this.createCell(row, columnCount++, etudinat.getNomE(), style);
-                this.createCell(row, columnCount++, etudinat.getPrenomE(), style);
-                this.createCell(row, columnCount++, etudinat.getDateNaissance(), style);
+                this.createCell(row, columnCount++, etudiant.getIdEtudiant(), style);
+                this.createCell(row, columnCount++, etudiant.getNomE(), style);
+                this.createCell(row, columnCount++, etudiant.getPrenomE(), style);
             });
             workbook.write(os);
         } catch (FileNotFoundException var12) {
@@ -176,50 +174,50 @@ public class EtudiantImp implements IEtudiantService{
     }
 
 
-    @Override
-    public void assignEtudiantToEquipe(Integer idEtudiant, Integer idEquipe){
+   @Override
+   public void assignEtudiantToEquipe(Integer idEtudiant, Integer idEquipe){
 
         Equipe equipe=equipeRepository.findById(idEquipe).orElse(null);
-        Etudinat etudinat=etudinatRepository.findById(idEtudiant).orElse(null);
-        etudinat.getEquipes().add(equipe);
-        etudinatRepository.save(etudinat);
+        Etudiant etudiant=etudiantRepository.findById(idEtudiant).orElse(null);
+        etudiant.getEquipes().add(equipe);
+        etudiantRepository.save(etudiant);
 
     }
 
 
 
     @Override
-    public Etudinat retrieveEtudiant(Integer idEtudiant) {
-        Etudinat e = etudinatRepository.findById(idEtudiant).orElse(null);
+    public Etudiant retrieveEtudiant(Integer idEtudiant) {
+        Etudiant e = etudiantRepository.findById(idEtudiant).orElse(null);
         return  e;
     }
 
 
     @Override
-    public List<Etudinat> getAllEtudiant() {
-        return (List<Etudinat>) etudinatRepository.findAll();
+    public List<Etudiant> getAllEtudiant() {
+        return (List<Etudiant>) etudiantRepository.findAll();
     }
 
     @Override
-    public Etudinat addEtudiant(Etudinat etudinat) {
-        return etudinatRepository.save(etudinat);
+    public Etudiant addEtudiant(Etudiant etudiant) {
+        return etudiantRepository.save(etudiant);
     }
 
     @Override
-    public Etudinat updateEtudiant(Etudinat etudinat) {
-        return etudinatRepository.save(etudinat);
+    public Etudiant updateEtudiant(Etudiant etudiant) {
+        return etudiantRepository.save(etudiant);
     }
 
     @Override
-    public void deleteEtudiant(Integer idEtudiant) { etudinatRepository.deleteById(idEtudiant);}
+    public void deleteEtudiant(Integer idEtudiant) { etudiantRepository.deleteById(idEtudiant);}
 
     @Override
-    public Etudinat getEtudiantById(Integer idEtudiant) {
-        return etudinatRepository.findById(idEtudiant).orElse( null);
+    public Etudiant getEtudiantById(Integer idEtudiant) {
+        return etudiantRepository.findById(idEtudiant).orElse( null);
     }
 
-    @Override
-    public List<Etudinat> retriveEtudiantByDepartementName(String nomDepart) {
-        return etudinatRepository.retriveEtudiantByDepartementName(nomDepart);
+  @Override
+    public List<Etudiant> retriveEtudiantByDepartementName(String nomDepart) {
+        return etudiantRepository.retriveEtudiantByDepartementName(nomDepart);
     }
 }

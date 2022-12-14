@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import tn.espritSpring.services.IContratService;
-import tn.espritSpring.DAO.entites.Contart;
+import tn.espritSpring.DAO.entites.Contrat;
 
 import java.util.Date;
 import java.util.List;
@@ -16,13 +16,13 @@ public class ContratController {
    public final IContratService iContratService ;
 
     @GetMapping("/getAllContrat")
-    public List<Contart> getAllContrat() {return iContratService.getAllContrat();}
+    public List<Contrat> getAllContrat() {return iContratService.getAllContrat();}
 
     @PostMapping("addContrat")
-    public Contart addContrat(@RequestBody Contart c) {return iContratService.addContrat(c);}
+    public Contrat addContrat(@RequestBody Contrat c) {return iContratService.addContrat(c);}
 
     @PutMapping("/updateContrat")
-    public Contart updateContrat(@RequestBody Contart c) {
+    public Contrat updateContrat(@RequestBody Contrat c) {
         return iContratService.updateContrat(c);
     }
 
@@ -30,7 +30,7 @@ public class ContratController {
     public void deleteContrat(@PathVariable("idContart") int idContart) {iContratService.deleteContrat(idContart);}
 
     @GetMapping("/getbyidContrat/{idContart}")
-    public Contart getContratById(@PathVariable("idContart") int idContart) {
+    public Contrat getContratById(@PathVariable("idContart") int idContart) {
         return iContratService.getContratById(idContart);
     }
 
@@ -41,11 +41,11 @@ public class ContratController {
     }
 
 
-    @GetMapping("/affaire/{startDate}/{endDate}")
+  /*  @GetMapping("/affaire/{startDate}/{endDate}")
     public  void calculChiffreAffaire(@PathVariable("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,@PathVariable("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate){
         iContratService.getChiffreAffaireEntreDeuxDate(startDate,endDate);
     }
-
+*/
 
 
 }

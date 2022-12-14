@@ -1,6 +1,6 @@
 package tn.espritSpring.services;
 
-import tn.espritSpring.DAO.entites.Etudinat;
+import tn.espritSpring.DAO.entites.Etudiant;
 
 import java.util.List;
 
@@ -9,23 +9,23 @@ public interface IEtudiantService {
 
     void assignContratToEtudiant (Integer idEtudiant ,Integer idContart  );
 
-  public  Etudinat addAndAssignEtudiantToEquipeAndContract(Integer idEtudiant, Integer idContart, Integer idEquipe);
+  public  Etudiant addAndAssignEtudiantToEquipeAndContract(Integer idEtudiant, Integer idContart, Integer idEquipe);
 
-   public List<Etudinat> getAllEtudiant() ;
-   public Etudinat addEtudiant(Etudinat etudinat);
+   public List<Etudiant> getAllEtudiant() ;
+   public Etudiant addEtudiant(Etudiant etudiant);
 
-   public Etudinat updateEtudiant(Etudinat etudinat);
+   public Etudiant updateEtudiant(Etudiant etudiant);
 
     void deleteEtudiant(Integer idEtudiant);
 
-    Etudinat retrieveEtudiant(Integer idEtudiant);
+    Etudiant retrieveEtudiant(Integer idEtudiant);
 
-   public Etudinat getEtudiantById(Integer idEtudiant) ;
+   public Etudiant getEtudiantById(Integer idEtudiant) ;
 
 
-   List<Etudinat> retriveEtudiantByDepartementName (String nomDepart);
+   List<Etudiant> retriveEtudiantByDepartementName (String nomDepart);
 
-    void assignEtudiantToEquipe(Integer idEtudiant, Integer idEquipe);
+   void assignEtudiantToEquipe(Integer idEtudiant, Integer idEquipe);
 
     public String generecarteetudpdf(Integer idEtudiant);
 

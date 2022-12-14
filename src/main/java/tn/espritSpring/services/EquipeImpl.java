@@ -3,16 +3,11 @@ package tn.espritSpring.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.espritSpring.DAO.entites.*;
 import tn.espritSpring.repositories.IEquipeRepository;
-import tn.espritSpring.repositories.IEtudinatRepository;
+import tn.espritSpring.repositories.IEtudiantRepository;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-import java.util.Iterator;
 import java.util.List;
 
 @Slf4j
@@ -24,7 +19,7 @@ public class EquipeImpl implements IEquipeService{
     @Autowired
     private final   IEquipeRepository equipeRepository ;
 
-    private final IEtudinatRepository etudinatRepository ;
+    private final IEtudiantRepository etudiantRepository ;
 
 
 
@@ -52,8 +47,8 @@ public class EquipeImpl implements IEquipeService{
     }
 
 
-    @Scheduled(cron = "*/1000 * * * * *")
-    void faireEvoluerEquipes(){
+ //@Scheduled(cron = "*/1000 * * * * *")
+   /* void faireEvoluerEquipes(){
 
         Iterator<Equipe> le = equipeRepository.findAll().iterator();
         while (le.hasNext()) {
@@ -74,8 +69,8 @@ public class EquipeImpl implements IEquipeService{
             }
         }
     }
-
-    private int findAncienMembre(Equipe equipe) {
+*/
+  /*  private int findAncienMembre(Equipe equipe) {
 
         int count = 0 ;
 
@@ -91,7 +86,7 @@ public class EquipeImpl implements IEquipeService{
             }
         }
         return count ;
-    }
+    }*/
 
 
 

@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -22,20 +23,18 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class Departement implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class Departement {
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column(name="idDepart")
-	private Integer idDepart;
-	
-	@Column(name="nomDepart")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idDepart;
 	private String nomDepart;
-	
-	
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="departement")
-	private Set<Etudinat> etudiants;
+
+
+
+
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "departement")
+	private List<Etudiant> etudiants;
+
 
 }

@@ -7,7 +7,7 @@ import java.util.List;
 public interface IDepartementService {
 
 
-    void assignEtudiantToDepartement (Integer idDepart , Integer idEtudiant);
+   // void assignEtudiantToDepartement (Integer idDepart , Integer idEtudiant);
 
     void assignDepartementToUniversite(Integer idUniv, Integer idDepart);
 

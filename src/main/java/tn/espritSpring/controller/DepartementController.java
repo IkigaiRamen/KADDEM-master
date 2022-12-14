@@ -27,10 +27,10 @@ public class DepartementController {
 
 //Affectation Departement au etudiant
 
-    @PutMapping("/update/{idDepart}/{idEtudiant}")
+  /*  @PutMapping("/update/{idDepart}/{idEtudiant}")
     public void updateDepartement(@PathVariable ("idDepart") Integer idDepart ,@PathVariable ("idEtudiant") Integer idEtudiant )
     { iDepartementService.assignEtudiantToDepartement(idDepart,idEtudiant);}
-
+*/
 //Affectation Universite au Departement
 
     @PutMapping("/assignDepartementToUniversite/{idUniv}/{idDepart}")
