@@ -43,8 +43,8 @@ public class Etudinat implements Serializable {
 	private LocalDate DateNaissance;
 
 
-	@Column(name="photo")
-	private byte[] photo;
+	/*@Column(name="photo")
+	private byte[] photo;*/
 	
 	@Column(name="option")
 	private Option option;
